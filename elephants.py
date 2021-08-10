@@ -1,5 +1,6 @@
 import tkinter as tk
 from tkinter import X
+from tkinter import font
 from tkinter.constants import RIGHT
 
 # window setup
@@ -8,6 +9,15 @@ window.geometry('400x600')
 window.configure(bg='#BFDCDE')
 
 # functions
+def count_elephants():
+    try:
+        lbs_value = int(input_entry.get())
+        elephants = round(lbs_value/15000, 2)
+        result_label['text'] = '{} is equal to\n {} elephants!'.format(lbs_value, elephants)
+        result_label.config(fg='black')
+    except ValueError:
+        result_label['text'] = 'Make sure to input\n number as weight!'
+        result_label.config(fg='red')
 
 # title
 title_frame = tk.Frame(
@@ -82,8 +92,41 @@ input_label.pack(side=RIGHT, padx=5)
 input_entry.pack(fill=X, padx=5, expand=True)
 
 # button
+button_frame = tk.Frame(
+    master=window,
+    width=250,
+    height=100,
+    bg='black'
+)
+button = tk.Button(
+    master=button_frame,
+    bg='#127278',
+    fg='white',
+    text='Calculate',
+    font=('Courier', 25),
+    padx=20,
+    pady=10,
+    command=count_elephants
+)
+button_frame.pack()
+button.pack()
 
 # result
+result_frame = tk.Frame(
+    master=window,
+    width=400,
+    pady=20,
+    bg='#BFDCDE'
+)
+result_label = tk.Label(
+    master=result_frame,
+    text='0 lbs is equal to\n 0 elephants!',
+    font=('Courier', 25, 'bold'),
+    bg='#BFDCDE',
+    fg='black'
+)
+result_frame.pack()
+result_label.pack()
 
 # making sure the window opens
 window.mainloop()
